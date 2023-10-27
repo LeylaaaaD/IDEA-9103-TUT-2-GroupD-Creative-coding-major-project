@@ -1,5 +1,4 @@
 let numDots = 1000; 
-let colorvariant;
 
 function setup() {
   createCanvas(300, 600);
