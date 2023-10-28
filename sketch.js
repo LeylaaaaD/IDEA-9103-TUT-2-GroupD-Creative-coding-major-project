@@ -39,7 +39,7 @@ function drawgrass() {
   }
 }
 
- function drawFlippedGrass() {
+function drawFlippedGrass() {
   push();  
  
   translate(375, 10);
@@ -54,10 +54,12 @@ function drawgrass1() {
   strokeWeight(4);
 
   let ellipseCenterX = 140, ellipseCenterY = 320;
-  let numCurves = 8; 
-  let lineLength = 110; 
+  let numCurves = 9; 
+  let lineLength = 100; 
   let curveAmount = 50; 
- 
+  let steps = 8;
+  let dotSize = 5;
+
   for (let i = 0; i < numCurves; i++) {
     if (random(1) > 0.5) {
       stroke(209, 79, 127);  
@@ -69,14 +71,33 @@ function drawgrass1() {
      
     let x1 = ellipseCenterX;
     let y1 = ellipseCenterY;
-    let x2 = x1 + (lineLength - curveAmount) * cos(angle);
-    let y2 = y1 - curveAmount * sin(angle);  // 修改y2
-    let x3 = x1 + curveAmount * 2 * cos(angle);
-    let y3 = y1 + curveAmount * sin(angle) * 2 // 修改y3的系数
-    let x4 = x1 + lineLength * cos(angle);
+    let x2 = x1 + (curveAmount * 0.5) * cos(angle);  
+    let y2 = y1 + (lineLength * 0.5) * sin(angle);  
+    let x3 = x1 + (lineLength * 0.75) * cos(angle); 
+    let y3 = y1 + (curveAmount * 0.75) * sin(angle); 
+    let x4 = x1 + lineLength  * cos(angle);
     let y4 = y1 + lineLength * sin(angle);
  
-     bezier(x1, y1, x2, y2, x3, y3, x4, y4);  
+    bezier(x1, y1, x2, y2, x3, y3, x4, y4);  
+
+  // add the red dots align the grass line
+    fill(255, 0, 0);  
+    noStroke();  
+    for (let j = 0; j <= steps; j++) {
+      let t = j / steps;
+      let px = bezierPoint(x1, x2, x3, x4, t);
+      let py = bezierPoint(y1, y2, y3, y4, t);
+
+      let dotsAngle = atan2(py - y1, px - x1) + HALF_PI; 
+      let offsetDistance = random(2, 4); 
+      let offsetX = offsetDistance * cos(dotsAngle);
+      let offsetY = offsetDistance * sin(dotsAngle);
+
+      px += offsetX;
+      py += offsetY;
+
+      ellipse(px, py, dotSize, dotSize);
+    }
   }
 }
 
@@ -119,7 +140,6 @@ function drawgrass2() {
  
      bezier(x1, y1, x2, y2, x3, y3, x4, y4);
     }
-
 }
 
 function draw() {
