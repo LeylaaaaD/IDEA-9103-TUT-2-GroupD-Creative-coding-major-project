@@ -119,6 +119,7 @@ function drawgrass2() {
  
      bezier(x1, y1, x2, y2, x3, y3, x4, y4);
     }
+
 }
 
 function drawLeaveCurve(){
@@ -197,14 +198,50 @@ function draw() {
     let size = random(6, 9);
     
     if (random(1) > 0.5) {
-      fill(209, 132, 161);  
-     } else {
-       fill(0);      
-     }
-     noStroke();
-     ellipse(x, y, size);
-   }
-   drawLeaveCurve();
+     fill(206, 72, 121);  
+    } else {
+      fill(0);      
+    }
+    noStroke();
+    ellipse(x, y, size);
+  }
+  drawLeaveCurve()
 }
  
+function drawLeaveCurve(){
+  noFill();
+  stroke(0);
+  strokeWeight(5)
+  beginShape();
+  curveVertex(0,140);
+  curveVertex(0,140);
+  curveVertex(80,140);
+  curveVertex(150,155);
+  curveVertex(150,155);
+  endShape();
+  
+  for (let i = 0; i < 7; i++) {
+    noFill();
+    stroke(0);
+    beginShape();
+    curveVertex(30 + i * 19, 140 + i);
+    curveVertex(30 + i * 19, 140 + i * 2);
+    curveVertex(45 + i * 18, 120 + i * 4);
+    curveVertex(75 + i * 19, 100 + i * 6);
+    curveVertex(75 + i * 19, 100 + i * 7);
+    endShape();
+  }
+
+  for (let i = 0; i < 7; i++) {
+    noFill();
+    stroke(0);
+    beginShape();
+    curveVertex(35 + i * 16, 140 + i);
+    curveVertex(35 + i * 16, 140 + i * 2);
+    curveVertex(35 + i * 18, 150 + i * 4);
+    curveVertex(60 + i * 19, 170 + i * 6);
+    curveVertex(35 + i * 19, 180 + i * 7);
+    endShape();
+  }
+}
 
