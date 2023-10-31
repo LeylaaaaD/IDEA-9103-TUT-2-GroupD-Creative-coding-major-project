@@ -190,10 +190,10 @@ function draw() {
   for (let i = 0; i < numDots; i++) {
     let x = random(width);
     let y = random(height);
-    let size = random(6, 9);
+    let size = random(5, 8);
     
     if (random(1) > 0.5) {
-     fill(206, 72, 121);  
+     fill(214, 139, 168);  
     } else {
       fill(0);      
     }
@@ -290,8 +290,8 @@ function drawLeaveCurve(){
     noFill();
     stroke(0);
     beginShape();
-    curveVertex(30 + i * 19, 140 + i);
-    curveVertex(30 + i * 19, 140 + i * 2);
+    curveVertex(30 + i * 19, 150 + i);
+    curveVertex(30 + i * 19, 150 + i * 2);
     curveVertex(45 + i * 18, 120 + i * 4);
     curveVertex(75 + i * 19, 100 + i * 6);
     curveVertex(75 + i * 19, 100 + i * 7);
@@ -302,12 +302,33 @@ function drawLeaveCurve(){
     noFill();
     stroke(0);
     beginShape();
-    curveVertex(35 + i * 16, 140 + i);
-    curveVertex(35 + i * 16, 140 + i * 2);
-    curveVertex(35 + i * 18, 150 + i * 4);
-    curveVertex(60 + i * 19, 170 + i * 6);
-    curveVertex(35 + i * 19, 180 + i * 7);
+    curveVertex(20 + i * 19, 138 + i);
+    curveVertex(20 + i * 19, 138 + i * 2);
+    curveVertex(35 + i * 18, 145 + i * 5);
+    curveVertex(50 + i * 19, 155 + i * 6);
+    curveVertex(60 + i * 19, 160 + i * 7);
+    endShape();
+  }
+  for (let i = 0; i < 5; i++) {
+    noFill()
+    stroke(209, 79, 127);
+    beginShape();
+    curveVertex(35 + i * 27, 140 + i);
+    curveVertex(35 + i * 27, 140 + i * 2);
+    curveVertex(65 + i * 20, 120 + i * 5);
+    curveVertex(80+ i * 19, 110 + i * 6);
+    curveVertex(80 + i * 19, 110 + i * 6);
+    endShape();
+  }
+  for (let i = 0; i < 5; i++) {
+    noFill()
+    stroke(209, 79, 127);
+    beginShape();
+    curveVertex(25 + i * 28, 140 + i);
+    curveVertex(25 + i * 28, 140 + i * 2);
+    curveVertex(35 + i * 28, 150 + i * 5);
+    curveVertex(80+ i * 19, 165 + i * 4);
+    curveVertex(80 + i * 19, 165 + i * 5);
     endShape();
   }
 }
-
