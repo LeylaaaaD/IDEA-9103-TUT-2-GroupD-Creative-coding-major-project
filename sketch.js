@@ -206,10 +206,10 @@ function draw() {
   for (let i = 0; i < numDots; i++) {
     let x = random(width);
     let y = random(height);
-    let size = random(6, 9);
+    let size = random(5, 8);
     
     if (random(1) > 0.5) {
-     fill(206, 72, 121);  
+     fill(214, 139, 168);  
     } else {
       fill(0);      
     }
