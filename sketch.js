@@ -84,7 +84,6 @@ function setup() {
 }
 
 function draw() {
-  background(242,169,4); 
   frameRate(1);
   drawgrass();
   drawgrass1();
