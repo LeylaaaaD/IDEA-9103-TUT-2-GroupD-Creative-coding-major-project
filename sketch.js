@@ -1,27 +1,37 @@
 let numDots = 700;
 let smallerGrass = [];
 let stems = [];
-let leave = []
+let leave = [];
 let smallerleave = [];
 
 function setup() {
   createCanvas(300, 600);
   background(242,169,4); 
+
+
+  stems = [
+    new stem(0, 140, 80, 140, 150, 150, 0, 0, 0),
+    new stem(0, 300, 25, 310, 50, 335, 0, 0, 0),
+    new stem(160, 450, 220, 380, 240, 340, 0, 0, 0)
+  ];
+
+  leave = [
+    new Leave(30, 140, 45, 120, 75, 105, 19, 18, 19, 1, 4, 6, 0, 0, 0),
+    new Leave(20, 138, 35, 145, 50, 155, 19, 18, 19, 1, 4, 6, 0, 0, 0)
+  ];
   
-  // draw the pink and black dots
-  for (let i = 0; i < numDots; i++) {
-    let x = random(width);
-    let y = random(height);
-    let size = random(5, 8);
-    
-    if (random(1) > 0.5) {
-     fill(214, 139, 168);  
-    } else {
-      fill(0);      
-    }
-    noStroke();
-    ellipse(x, y, size);
-  }
+  smallerLeave = [
+    new Smallerleave(35, 140, 65, 120, 80, 110, 27, 20, 19, 2, 5, 6, color(209, 79, 127)),
+    new Smallerleave(25, 140, 45, 140, 80, 160, 27, 21, 19, 2, 5, 6, color(209, 79, 127)),
+    new Smallerleave(8, 300, 10, 295, 20, 285, 6, 10, 12, 2, 5, 6, color(209, 79, 127)),
+    new Smallerleave(8, 300, 3, 312, 10, 340, 7, 10, 13, 5, 6, 6, color(209, 79, 127)),
+    new Smallerleave(0, 300, 5, 295, 12, 285, 1, 2, 13, 1, 4, 10, 0, 0, 0),
+    new Smallerleave(5, 300, 0, 310, 6, 330, 1, 10, 11, 1, 7, 8, 0, 0, 0),
+    new Smallerleave(185, 420, 175, 390, 190, 360, 9, 13, 10, -12, -14, -9, color(209, 79, 127)),
+    new Smallerleave(180, 430, 210, 420, 250, 385, 9, 7, 4, -12, -15, -15, color(209, 79, 127)),
+    new Smallerleave(180, 430, 180, 400, 190, 365, 9, 10, 12, -15, -14, -10, 0, 0, 0),
+    new Smallerleave(185, 420, 220, 410, 250, 385, 10, 7, 4, -14, -14, -13, 0, 0, 0),
+  ];
 
   smallerGrass = [
     new Small(0, 0, color(0, 0, 0), -1, 12, 3, 80, 5),
@@ -57,42 +67,37 @@ function setup() {
     new Small(260, 430, color(107, 33, 33), 1, 8),
     new Small(220, 490, color(0, 0, 0), -1, 6)
   ];
-  
-  stems = [
-    new stem(0, 140, 80, 140, 150, 150, 0, 0, 0, null, null, null),
-    new stem(0, 300, 25, 310, 50, 335, 0, 0, 0, null, null, null),
-    new stem(160, 450, 220, 380, 240, 340, 0, 0, 0, null, null, null)
-  ];
-
-  leave = [
-    new Leave(30, 140, 45, 120, 75, 105, 19, 18, 19, 1, 4, 6, 0, 0, 0, null, null, null),
-    new Leave(20, 138, 35, 145, 50, 155, 19, 18, 19, 1, 4, 6, 0, 0, 0, null, null, null)
-  ];
-  
-  smallerLeave = [
-    new Smallerleave(35, 140, 65, 120, 80, 110, 27, 20, 19, 2, 5, 6, color(209, 79, 127), null, null, null),
-    new Smallerleave(25, 140, 45, 140, 80, 160, 27, 21, 19, 2, 5, 6, color(209, 79, 127), null, null, null),
-    new Smallerleave(0, 300, 5, 295, 12, 285, 1, 2, 13, 1, 4, 10, 0, 0, 0, null, null, null),
-    new Smallerleave(5, 300, 0, 310, 6, 330, 1, 10, 11, 1, 7, 8, 0, 0, 0, null, null, null),
-    new Smallerleave(8, 300, 10, 295, 20, 285, 6, 10, 12, 2, 5, 6, color(209, 79, 127), null, null, null),
-    new Smallerleave(8, 300, 3, 312, 10, 340, 7, 10, 13, 5, 6, 6, color(209, 79, 127), null, null, null),
-    new Smallerleave(180, 430, 180, 400, 190, 365, 9, 10, 12, -15, -14, -10, 0, 0, 0, null, null, null),
-    new Smallerleave(185, 420, 220, 410, 250, 385, 10, 7, 4, -14, -14, -13, 0, 0, 0, null, null, null),
-    new Smallerleave(185, 420, 175, 390, 190, 360, 9, 13, 10, -12, -14, -9, color(209, 79, 127), null, null, null),
-    new Smallerleave(180, 430, 210, 420, 250, 385, 9, 7, 4, -12, -15, -15, color(209, 79, 127), null, null, null)
-  ];
 }
 
-function draw() {
-  frameRate(1);
-  drawgrass();
-  drawgrass1();
-  drawFlippedGrass();
-  drawFlippedGrass1();
-  drawgrass2();
-  drawStraightWeeds();
-  drawCurvedWeeds();
 
+function draw() {
+  background(242,169,4); 
+  frameRate(1);
+
+  // draw the pink and black dots
+  for (let i = 0; i < numDots; i++) {
+    let x = random(width);
+    let y = random(height);
+    let size = random(5, 8);
+      
+    if (random(1) > 0.5) {
+      fill(214, 139, 168);  
+    } else {
+      fill(0);      
+    }
+    noStroke();
+    ellipse(x, y, size);
+  }
+
+  grass();
+  grass1();
+  grass2();
+  FlippedGrass();
+  FlippedGrass1();
+  StraightWeeds();
+  CurvedWeeds();
+
+  // draw the branch of the first huge grass
   stroke(79, 21, 27);
   line(190, 80, 220, 220);
 
@@ -125,18 +130,18 @@ function draw() {
   for (let stem of stems) {
     stem.display();
   }
+  
+  for (let sLeaf of smallerLeave) {
+    sLeaf.display();
+  }
 
   for (let leaf of leave) {
     leaf.display();
   }
-
-  for (let sLeaf of smallerLeave) {
-    sLeaf.display();
-  }
 }
 
-function drawgrass() {
-   // draw the curve for the first huge grass
+// Draw the first huge grass
+function grass() {
    noFill();
    strokeWeight(4);
  
@@ -167,17 +172,17 @@ function drawgrass() {
   }
 }
 
-function drawFlippedGrass() {
+function FlippedGrass() {
   push();  
  
   translate(375, 10);
   scale(-1, 1);
-  drawgrass(); 
+  grass(); 
   pop();  
 }
 
-function drawgrass1() {
-  // draw the curve for the first huge grass
+// Draw the second huge grass
+function grass1() {
   noFill();
   strokeWeight(4);
 
@@ -229,17 +234,17 @@ function drawgrass1() {
   }
 }
 
-function drawFlippedGrass1() {
+function FlippedGrass1() {
   push();  
  
   translate(300, -5);
   scale(-1, 1);
-  drawgrass1(); 
+  grass1(); 
   pop();  
 }
 
-function drawgrass2() {
-  // draw the curve for the first huge grass
+// Draw the third huge grass
+function grass2() {
   noFill();
   strokeWeight(4);
 
@@ -270,45 +275,54 @@ function drawgrass2() {
     }
 }
 
-function drawStraightWeeds() {
-  let numWeeds = 30;
-  let weedSpacing = width / numWeeds;
-  let weedWidth = 3;
+function StraightWeeds() {
+  let numWeeds = 20;
+  let weedSpacing = 9;
+  let weedWidth;
   let minWeedHeight = 20;
   let maxWeedHeight = 50;
 
+  // Drawing straight weeds on the bottom and right
   for (let i = 0; i <= numWeeds; i++) {
-    if (random(1) > 0.2) {
+    weedWidth = random(2,4);
+    if (random(1) > 0.4) {
       stroke(209, 79, 127);
     } else {
       stroke(0);
     }
     strokeWeight(weedWidth);
-  }
 
-  // Drawing straight weeds on the bottom
-  for (let i = 0; i <= numWeeds; i++) {
     let x = i * weedSpacing;
-    x = constrain(x, 0, 180)
+    x = constrain(x, 0, 180);
     let weedHeight = random(minWeedHeight, maxWeedHeight);
     line(x, height, x, height - weedHeight);
+
+    let yRight = i * weedSpacing;
+    yRight = constrain(yRight, 100, 220);
+    let rightWeedHeight = random(15, 25);
+    line(width, yRight, width - rightWeedHeight, yRight);
   }
 
-  // Drawing straight weeds on the right
-  for (let i = 0; i <= numWeeds; i++) {
-    let y = i * weedSpacing;
-    y = constrain(y, 100, 200)
-    let weedHeight = random(15, 20);
-    line(width, y, width - weedHeight, y);
+  // Drawing straight weeds on the left 
+  for (let i = 0; i <= 15; i++) {
+    let yLeft = map(i, 0, 9, 460, 550); 
+    let leftWeedWidth = random(10, 15);
+    
+    if (random(1) > 0.5) {
+      stroke(125, 30, 24); 
+    } else {
+      stroke(0);
+    }
+    line(0, yLeft, leftWeedWidth, yLeft);
   }
 }
 
-function drawCurvedWeeds() {
-  let numWeeds = 20;
-  let weedSpacing = height / numWeeds;
+function CurvedWeeds() {
+  let numWeeds = 5;
+  let weedSpacing = 160 / numWeeds;
   let weedWidth = 3;
-  let minWeedHeight = 20;
-  let maxWeedHeight = 50;
+  let minWeedHeight = 5;
+  let maxWeedHeight = 60;
   let controlOffset = 20;
 
   for (let i = 0; i <= numWeeds; i++) {
@@ -328,15 +342,15 @@ function drawCurvedWeeds() {
     bezier(x, height, ctrlPt1X, height - weedHeight / 3, ctrlPt2X, height - 2 * weedHeight / 3, x, height - weedHeight);
 
     // Drawing curved weeds on the left
-    let y1 = i * weedSpacing;
-    y1 = constrain(y1, 450, height);
+    let y1 = 450 + i * weedSpacing / 2 ;
+    y1 = constrain(y1, 450, height - 30);
     weedHeight = random(20, 30);
     let ctrlPtY1 = constrain(y1 + random(-controlOffset, controlOffset), 0, height);
     let ctrlPtY2 = constrain(y1 + random(-controlOffset, controlOffset), 0, height);
     bezier(0, y1, weedHeight / 3, ctrlPtY1, 2 * weedHeight / 3, ctrlPtY2, weedHeight, y1);
 
     // Drawing curved weeds on the right
-    let y2 = i * weedSpacing;
+    let y2 = 100 + i * weedSpacing / 2;
     y2 = constrain(y2, 100, 200);
     weedHeight = random(15, 20);
     let ctrlPtY3 = constrain(y2 + random(-controlOffset, controlOffset), 0, height);
