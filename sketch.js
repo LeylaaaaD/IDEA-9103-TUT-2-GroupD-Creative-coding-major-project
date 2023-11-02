@@ -379,7 +379,7 @@ class Leave {
   }
 }
 
-class Smallerleave{
+class Smallerleave {
   constructor(sX1, sY1, sX2, sY2, sX3, sY3, num1, num2, num3, num4, num5, num6, ColorS, tX3, tY3, AngleS){
     this.sX1 = sX1;
     this.sY1 = sY1;
@@ -416,4 +416,3 @@ class Smallerleave{
     }
   }
 }
-
