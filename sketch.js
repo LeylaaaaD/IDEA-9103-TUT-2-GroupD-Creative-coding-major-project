@@ -233,6 +233,81 @@ class Small {
   }
 }
 
+function drawStraightWeeds() {
+  let numWeeds = 30;
+  let weedSpacing = width / numWeeds;
+  let weedWidth = 3;
+  let minWeedHeight = 20;
+  let maxWeedHeight = 50;
+
+  for (let i = 0; i <= numWeeds; i++) {
+    if (random(1) > 0.2) {
+      stroke(209, 79, 127);
+    } else {
+      stroke(0);
+    }
+    strokeWeight(weedWidth);
+  }
+
+  // Drawing straight weeds on the bottom
+  for (let i = 0; i <= numWeeds; i++) {
+    let x = i * weedSpacing;
+    x = constrain(x, 0, 180)
+    let weedHeight = random(minWeedHeight, maxWeedHeight);
+    line(x, height, x, height - weedHeight);
+  }
+
+  // Drawing straight weeds on the right
+  for (let i = 0; i <= numWeeds; i++) {
+    let y = i * weedSpacing;
+    y = constrain(y, 100, 200)
+    let weedHeight = random(15, 20);
+    line(width, y, width - weedHeight, y);
+  }
+}
+
+function drawCurvedWeeds() {
+  let numWeeds = 20;
+  let weedSpacing = height / numWeeds;
+  let weedWidth = 3;
+  let minWeedHeight = 20;
+  let maxWeedHeight = 50;
+  let controlOffset = 20;
+
+  for (let i = 0; i <= numWeeds; i++) {
+    if (random(1) > 0.2) {
+      stroke(179, 70, 105);
+    } else {
+      stroke(0);
+    }
+    strokeWeight(weedWidth);
+
+    // Drawing curved weeds on the bottom
+    let x = i * weedSpacing;
+    x = constrain(x, 0, 180);
+    let weedHeight = random(minWeedHeight, maxWeedHeight);
+    let ctrlPt1X = constrain(x + random(-controlOffset, controlOffset), 0, width);
+    let ctrlPt2X = constrain(x + random(-controlOffset, controlOffset), 0, width);
+    bezier(x, height, ctrlPt1X, height - weedHeight / 3, ctrlPt2X, height - 2 * weedHeight / 3, x, height - weedHeight);
+
+    // Drawing curved weeds on the left
+    let y1 = i * weedSpacing;
+    y1 = constrain(y1, 450, height);
+    weedHeight = random(20, 30);
+    let ctrlPtY1 = constrain(y1 + random(-controlOffset, controlOffset), 0, height);
+    let ctrlPtY2 = constrain(y1 + random(-controlOffset, controlOffset), 0, height);
+    bezier(0, y1, weedHeight / 3, ctrlPtY1, 2 * weedHeight / 3, ctrlPtY2, weedHeight, y1);
+
+    // Drawing curved weeds on the right
+    let y2 = i * weedSpacing;
+    y2 = constrain(y2, 100, 200);
+    weedHeight = random(15, 20);
+    let ctrlPtY3 = constrain(y2 + random(-controlOffset, controlOffset), 0, height);
+    let ctrlPtY4 = constrain(y2 + random(-controlOffset, controlOffset), 0, height);
+    bezier(width, y2, width - weedHeight / 3, ctrlPtY3, width - 2 * weedHeight / 3, ctrlPtY4, width - weedHeight, y2);
+  }
+}
+
 class Leave {
   constructor(LX1, LY1, LX2, LY2, LX3, LY3, numA, numB, numC, numD, numE, numF, lColor, tX2, tY2, lAngle){
     this.LX1 = LX1;
