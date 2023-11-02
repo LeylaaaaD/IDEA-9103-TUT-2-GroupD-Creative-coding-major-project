@@ -7,132 +7,22 @@ let smallerleave = [];
 function setup() {
   createCanvas(300, 600);
   background(242,169,4); 
-  
-  smallerGrass = [
-    new Small(0, 0, color(0, 0, 0), -1, 12, 3, 80, 5),
-    new Small(0, 180, color(0, 0, 0), -1, 7, 3, 25, 5),
-    new Small(5, 230, color(0, 0, 0), -1, 8, 3, 40, 10),
-    new Small(5, 400, color(0, 0, 0), -1, 8, 3, 40, 10),
-    new Small(10, 400, color(209, 79, 127), -1, 7, 3, 40, 10),
-    new Small(10, 230, color(209, 79, 127), -1, 7, 3, 40, 10),
-    new Small(95, 200, color(0, 0, 0), 2, 8, 3, 25, 5),
-    new Small(90, 205, color(255, 0, 0), 2, 8, 3, 25, 5),
-    new Small(192, 153, color(255, 0, 0)),
-    new Small(205, 150, color(255, 0, 0)),
-    new Small(192, 153, color(255, 0, 0)),
-    new Small(230, 220, color(220, 79, 180), 2, 7),
-    new Small(225, 220, color(0, 0, 0), 2, 7),
-    new Small(270, 180, color(0, 0, 0), 1, 6),
-    new Small(290, 240, color(0, 0, 0)),
-    new Small(295, 240, color(209, 79, 127)),
-    new Small(300, 240, color(255, 0, 0)),
-    new Small(290, 290, color(0, 0, 0)),
-    new Small(295, 290, color(209, 79, 127)),
-    new Small(300, 290, color(255, 0, 0)),
-    new Small(295, 340, color(209, 79, 127)),
-    new Small(300, 340, color(255, 0, 0)),
-    new Small(300, 440, color(0, 0, 0), 1, 6),
-    new Small(290, 440, color(0, 0, 0), 1, 6),
-    new Small(300, 500, color(0, 0, 0), 1, 5),
-    new Small(300, 540, color(0, 0, 0), 1, 5),
-    new Small(270, 580, color(0, 0, 0), 1, 5),
-    new Small(205, 600, color(255, 0, 0), 2, 14, 3, 25, 5),
-    new Small(80, 350, color(255, 0, 0), -1.5, 10, 3, 20, 10),
-    new Small(120, 400, color(220, 79, 180), 2, 16, 3, 30, 20),
-    new Small(260, 430, color(107, 33, 33), 1, 8),
-    new Small(220, 490, color(0, 0, 0), -1, 6)
-  ];
-  
-  stems = [
-    new stem(0, 140, 80, 140, 150, 150, 0, 0, 0, null, null, null),
-    new stem(0, 300, 25, 310, 50, 335, 0, 0, 0, null, null, null),
-    new stem(160, 450, 220, 380, 240, 340, 0, 0, 0, null, null, null)
-  ];
-
-  leave = [
-    new Leave(30, 140, 45, 120, 75, 105, 19, 18, 19, 1, 4, 6, 0, 0, 0, null, null, null),
-    new Leave(20, 138, 35, 145, 50, 155, 19, 18, 19, 1, 4, 6, 0, 0, 0, null, null, null)
-  ];
-  
-  smallerLeave = [
-    new Smallerleave(35, 140, 65, 120, 80, 110, 27, 20, 19, 2, 5, 6, color(209, 79, 127), null, null, null),
-    new Smallerleave(25, 140, 45, 140, 80, 160, 27, 21, 19, 2, 5, 6, color(209, 79, 127), null, null, null),
-    new Smallerleave(0, 300, 5, 295, 12, 285, 1, 2, 13, 1, 4, 10, 0, 0, 0, null, null, null),
-    new Smallerleave(5, 300, 0, 310, 6, 330, 1, 10, 11, 1, 7, 8, 0, 0, 0, null, null, null),
-    new Smallerleave(8, 300, 10, 295, 20, 285, 6, 10, 12, 2, 5, 6, color(209, 79, 127), null, null, null),
-    new Smallerleave(8, 300, 3, 312, 10, 340, 7, 10, 13, 5, 6, 6, color(209, 79, 127), null, null, null),
-    new Smallerleave(180, 430, 180, 400, 190, 365, 9, 10, 12, -15, -14, -10, 0, 0, 0, null, null, null),
-    new Smallerleave(185, 420, 220, 410, 250, 385, 10, 7, 4, -14, -14, -13, 0, 0, 0, null, null, null),
-    new Smallerleave(185, 420, 175, 390, 190, 360, 9, 13, 10, -12, -14, -9, color(209, 79, 127), null, null, null),
-    new Smallerleave(180, 430, 210, 420, 250, 385, 9, 7, 4, -12, -15, -15, color(209, 79, 127), null, null, null)
-  ];
-
-
-}
-
-function draw() {
-  background(242,169,4); 
-  frameRate(1)
-  // draw the pink and black dots
-  for (let i = 0; i < numDots; i++) {
-    let x = random(width);
-    let y = random(height);
-    let size = random(5, 8);
-    
-    if (random(1) > 0.5) {
-     fill(214, 139, 168);  
-    } else {
-      fill(0);      
-    }
-    noStroke();
-    ellipse(x, y, size);
-  }
-  drawgrass();
-  drawgrass1();
-  drawFlippedGrass();
-  drawFlippedGrass1();
-  drawgrass2();
-
-  stroke(79, 21, 27);
-  line(190, 80, 220, 220);
-
-  // draw the first roots of the huge grass
-  noStroke();
-  fill(183, 90, 125);  
-  ellipse(190, 90, 40, 30);  
-
-  //draw the second roots of the huge grass
-  fill(196, 85, 135);  
-  ellipse(150, 320, 40, 35);
-
-  fill(105, 46, 76);  
-  ellipse(150, 320, 35, 30);
-  
-  fill(252, 105, 155); 
-  ellipse(150, 320, 30, 25);  
-  
-  fill(82, 25, 50); 
-  ellipse(150, 320, 25, 20);
-
-  //draw the third roots of the huge grass
-  fill(229, 82, 139);  
-  ellipse(115, 455, 45, 30);  
-  
-  for (let grass of smallerGrass) {
-    grass.display();
-  }
-
-  for (let stem of stems) {
-    stem.display();
-  }
-
-  for (let leaf of leave) {
-    leaf.display();
-  }
-
-  for (let sLeaf of smallerLeave) {
-    sLeaf.display();
-  }
+  noLoop();
+  StemOne = new stem(0, 140, 80, 140, 150, 150, 0, 0, 0, null, null, null)
+  LeaveOne = new leaves(30, 140, 45, 120, 75, 105, 19, 18, 19, 1, 4, 6, 0, 0, 0, null, null, null)
+  LeaveOnes = new leaves(20, 138, 35, 145, 50, 155, 19, 18, 19, 1, 4, 6, 0, 0, 0, null, null, null)
+  LeaveOneP = new smallerleaves(35, 140, 65, 120, 80, 110, 27, 20, 19, 2, 5, 6, color(209, 79, 127), null, null, null)
+  LeaveOnePS = new smallerleaves(25, 140, 45, 140, 80, 160, 27, 21, 19, 2, 5, 6, color(209, 79, 127), null, null, null)
+  StemTwo = new stem(0, 300, 25, 310, 50, 335, 0, 0, 0, null, null, null)
+  LeaveTwo = new smallerleaves(0, 300, 5, 295, 12, 285, 1, 2, 13, 1, 4, 10, 0, 0, 0, null, null, null)
+  LeaveTwos = new smallerleaves(5, 300, 0, 310, 6, 330, 1, 10, 11, 1, 7, 8, 0, 0, 0, null, null, null)
+  LeaveTwoP = new smallerleaves(8, 300, 10, 295, 20, 285, 6, 10, 12, 2, 5, 6, color(209, 79, 127), null, null, null)
+  LeaveTwoPS = new smallerleaves(8, 300, 3, 312, 10, 340, 7, 10, 13, 5, 6, 6, color(209, 79, 127), null, null, null)
+  StemThree = new stem(160, 450, 220, 380, 240, 340, 0, 0, 0, null, null, null)
+  LeaveThree = new smallerleaves(180, 430, 180, 400, 190, 365, 9, 10, 12, -15, -14, -10, 0, 0, 0, null, null, null)
+  LeaveThrees = new smallerleaves(185, 420, 220, 410, 250, 385, 10, 7, 4, -14, -14, -13, 0, 0, 0, null, null, null)
+  LeaveThreeP = new smallerleaves(185, 420, 175, 390, 190, 360, 9, 13, 10, -12, -14, -9, color(209, 79, 127), null, null, null)
+  LeaveThreePS = new smallerleaves(180, 430, 210, 420, 250, 385, 9, 7, 4, -12, -15, -15, color(209, 79, 127), null, null, null)
 }
 
 function drawgrass() {
@@ -418,3 +308,6 @@ class Smallerleave {
     }
   }
 }
+
+
+
