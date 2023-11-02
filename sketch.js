@@ -6,9 +6,9 @@ let smallerleave = [];
 
 function setup() {
   createCanvas(300, 600);
-  background(242,169,4);
-
-  // draw pink and black dots
+  background(242,169,4); 
+  
+  // draw the pink and black dots
   for (let i = 0; i < numDots; i++) {
     let x = random(width);
     let y = random(height);
@@ -84,6 +84,7 @@ function setup() {
 }
 
 function draw() {
+  background(242,169,4); 
   frameRate(1);
   drawgrass();
   drawgrass1();
@@ -151,9 +152,8 @@ function drawgrass() {
      } else {
        stroke(179, 70, 105);      
      }
-  
-    for (let i = 0; i < numCurves; i++) {
-      let angle = map(i, 0, numCurves, 0, -HALF_PI);
+
+     let angle = map(i, 0, numCurves, 0, -HALF_PI);  
      
      let x1 = ellipseCenterX;
      let y1 = ellipseCenterY;
@@ -165,7 +165,6 @@ function drawgrass() {
      let y4 = y1 + lineLength * sin(angle);
  
      bezier(x1, y1, x2, y2, x3, y3, x4, y4);
-    }
   }
 }
 
@@ -191,12 +190,11 @@ function drawgrass1() {
   let dotSize = 5;
 
   for (let i = 0; i < numCurves; i++) {
-      if (random(1) > 0.5) {
-        stroke(209, 79, 127);  
-      } else {
-        stroke(0);      
-      }
-    }
+    if (random(1) > 0.5) {
+      stroke(209, 79, 127);  
+     } else {
+       stroke(0);      
+     }
 
     let angle = map(i, 0, numCurves, 0, -HALF_PI);  
      
@@ -229,6 +227,7 @@ function drawgrass1() {
 
       ellipse(px, py, dotSize, dotSize);
     }
+  }
 }
 
 function drawFlippedGrass1() {
@@ -256,7 +255,7 @@ function drawgrass2() {
      } else {
        stroke(0);      
      }
-  
+
      let angle = map(i, 2, numCurves, 0, PI);  
      
      let x1 = ellipseCenterX;
@@ -360,7 +359,6 @@ class stem {
     this.tY1 = tY1;
     this.sAngle = sAngle
   }
-  
   display(){
     push()
     translate(this.tX1, this.tY1)
@@ -440,7 +438,8 @@ class Leave {
     this.tY2 = tY2;
     this.lAngle = lAngle
   }
-  display(){
+
+  display() {
     for (let i = 0; i < 7; i++) {
       push()
       translate(this.tX2, this.tY2)
@@ -478,8 +477,7 @@ class Smallerleave {
     this.tY3 = tY3;
     this.AngleS = AngleS
   }
-
-  display() {
+  display(){
     for (let i = 0; i < 5; i++) {
       push()
       translate(this.tX3, this.tY3)
