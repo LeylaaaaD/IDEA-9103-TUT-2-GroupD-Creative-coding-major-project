@@ -1,10 +1,136 @@
 let numDots = 700;
 let smallerGrass = [];
+let stems = [];
+let leave = []
+let smallerleave = [];
 
 function setup() {
   createCanvas(300, 600);
   background(242,169,4); 
+  
+  smallerGrass = [
+    new Small(0, 0, color(0, 0, 0), -1, 12, 3, 80, 5),
+    new Small(0, 180, color(0, 0, 0), -1, 7, 3, 25, 5),
+    new Small(5, 230, color(0, 0, 0), -1, 8, 3, 40, 10),
+    new Small(5, 400, color(0, 0, 0), -1, 8, 3, 40, 10),
+    new Small(10, 400, color(209, 79, 127), -1, 7, 3, 40, 10),
+    new Small(10, 230, color(209, 79, 127), -1, 7, 3, 40, 10),
+    new Small(95, 200, color(0, 0, 0), 2, 8, 3, 25, 5),
+    new Small(90, 205, color(255, 0, 0), 2, 8, 3, 25, 5),
+    new Small(192, 153, color(255, 0, 0)),
+    new Small(205, 150, color(255, 0, 0)),
+    new Small(192, 153, color(255, 0, 0)),
+    new Small(230, 220, color(220, 79, 180), 2, 7),
+    new Small(225, 220, color(0, 0, 0), 2, 7),
+    new Small(270, 180, color(0, 0, 0), 1, 6),
+    new Small(290, 240, color(0, 0, 0)),
+    new Small(295, 240, color(209, 79, 127)),
+    new Small(300, 240, color(255, 0, 0)),
+    new Small(290, 290, color(0, 0, 0)),
+    new Small(295, 290, color(209, 79, 127)),
+    new Small(300, 290, color(255, 0, 0)),
+    new Small(295, 340, color(209, 79, 127)),
+    new Small(300, 340, color(255, 0, 0)),
+    new Small(300, 440, color(0, 0, 0), 1, 6),
+    new Small(290, 440, color(0, 0, 0), 1, 6),
+    new Small(300, 500, color(0, 0, 0), 1, 5),
+    new Small(300, 540, color(0, 0, 0), 1, 5),
+    new Small(270, 580, color(0, 0, 0), 1, 5),
+    new Small(205, 600, color(255, 0, 0), 2, 14, 3, 25, 5),
+    new Small(80, 350, color(255, 0, 0), -1.5, 10, 3, 20, 10),
+    new Small(120, 400, color(220, 79, 180), 2, 16, 3, 30, 20),
+    new Small(260, 430, color(107, 33, 33), 1, 8),
+    new Small(220, 490, color(0, 0, 0), -1, 6)
+  ];
+  
+  stems = [
+    new stem(0, 140, 80, 140, 150, 150, 0, 0, 0, null, null, null),
+    new stem(0, 300, 25, 310, 50, 335, 0, 0, 0, null, null, null),
+    new stem(160, 450, 220, 380, 240, 340, 0, 0, 0, null, null, null)
+  ];
+
+  leave = [
+    new Leave(30, 140, 45, 120, 75, 105, 19, 18, 19, 1, 4, 6, 0, 0, 0, null, null, null),
+    new Leave(20, 138, 35, 145, 50, 155, 19, 18, 19, 1, 4, 6, 0, 0, 0, null, null, null)
+  ];
+  
+  smallerLeave = [
+    new Smallerleave(35, 140, 65, 120, 80, 110, 27, 20, 19, 2, 5, 6, color(209, 79, 127), null, null, null),
+    new Smallerleave(25, 140, 45, 140, 80, 160, 27, 21, 19, 2, 5, 6, color(209, 79, 127), null, null, null),
+    new Smallerleave(0, 300, 5, 295, 12, 285, 1, 2, 13, 1, 4, 10, 0, 0, 0, null, null, null),
+    new Smallerleave(5, 300, 0, 310, 6, 330, 1, 10, 11, 1, 7, 8, 0, 0, 0, null, null, null),
+    new Smallerleave(8, 300, 10, 295, 20, 285, 6, 10, 12, 2, 5, 6, color(209, 79, 127), null, null, null),
+    new Smallerleave(8, 300, 3, 312, 10, 340, 7, 10, 13, 5, 6, 6, color(209, 79, 127), null, null, null),
+    new Smallerleave(180, 430, 180, 400, 190, 365, 9, 10, 12, -15, -14, -10, 0, 0, 0, null, null, null),
+    new Smallerleave(185, 420, 220, 410, 250, 385, 10, 7, 4, -14, -14, -13, 0, 0, 0, null, null, null),
+    new Smallerleave(185, 420, 175, 390, 190, 360, 9, 13, 10, -12, -14, -9, color(209, 79, 127), null, null, null),
+    new Smallerleave(180, 430, 210, 420, 250, 385, 9, 7, 4, -12, -15, -15, color(209, 79, 127), null, null, null)
+  ];
+
   noLoop();
+}
+
+function draw() {
+  // draw the pink and black dots
+  for (let i = 0; i < numDots; i++) {
+    let x = random(width);
+    let y = random(height);
+    let size = random(5, 8);
+    
+    if (random(1) > 0.5) {
+     fill(214, 139, 168);  
+    } else {
+      fill(0);      
+    }
+    noStroke();
+    ellipse(x, y, size);
+  }
+  drawgrass();
+  drawgrass1();
+  drawFlippedGrass();
+  drawFlippedGrass1();
+  drawgrass2();
+
+  stroke(79, 21, 27);
+  line(190, 80, 220, 220);
+
+  // draw the first roots of the huge grass
+  noStroke();
+  fill(183, 90, 125);  
+  ellipse(190, 90, 40, 30);  
+
+  //draw the second roots of the huge grass
+  fill(196, 85, 135);  
+  ellipse(150, 320, 40, 35);
+
+  fill(105, 46, 76);  
+  ellipse(150, 320, 35, 30);
+  
+  fill(252, 105, 155); 
+  ellipse(150, 320, 30, 25);  
+  
+  fill(82, 25, 50); 
+  ellipse(150, 320, 25, 20);
+
+  //draw the third roots of the huge grass
+  fill(229, 82, 139);  
+  ellipse(115, 455, 45, 30);  
+  
+  for (let grass of smallerGrass) {
+    grass.display();
+  }
+
+  for (let stem of stems) {
+    stem.display();
+  }
+
+  for (let leaf of leave) {
+    leaf.display();
+  }
+
+  for (let sLeaf of smallerLeave) {
+    sLeaf.display();
+  }
 }
 
 function drawgrass() {
@@ -142,6 +268,36 @@ function drawgrass2() {
     }
 }
 
+class stem {
+  constructor(SX1, SY1, SX2, SY2, SX3, SY3, sColor, tX1, tY1, sAngle){
+    this.SX1 = SX1;
+    this.SY1 = SY1;
+    this.SX2 = SX2;
+    this.SY2 = SY2;
+    this.SX3 = SX3;
+    this.SY3 = SY3;
+    this.sColor = sColor;
+    this.tX1 = tX1;
+    this.tY1 = tY1;
+    this.sAngle = sAngle
+  }
+  display(){
+    push()
+    translate(this.tX1, this.tY1)
+    fill(0);
+    stroke(this.sColor);
+    strokeWeight(5)
+    beginShape();
+    curveVertex(this.SX1,this.SY1);
+    curveVertex(this.SX1,this.SY1);
+    curveVertex(this.SX2,this.SY2);
+    curveVertex(this.SX3,this.SY3);
+    curveVertex(this.SX3,this.SY3);
+    endShape();
+    pop()
+  }
+}
+
 class Small {
   constructor(x, y, color, angleMultiplier = 1, numCurves = 5, strokeW = 3, lineLength = 20, circleSize = 5) {
     this.x = x;
@@ -185,150 +341,79 @@ class Small {
   }
 }
 
-function draw() {
-  // draw the pink and black dots
-  for (let i = 0; i < numDots; i++) {
-    let x = random(width);
-    let y = random(height);
-    let size = random(5, 8);
-    
-    if (random(1) > 0.5) {
-     fill(214, 139, 168);  
-    } else {
-      fill(0);      
+class Leave {
+  constructor(LX1, LY1, LX2, LY2, LX3, LY3, numA, numB, numC, numD, numE, numF, lColor, tX2, tY2, lAngle){
+    this.LX1 = LX1;
+    this.LY1 = LY1;
+    this.LX2 = LX2;
+    this.LY2 = LY2;
+    this.LX3 = LX3;
+    this.LY3 = LY3;
+    this.numA = numA;
+    this.numB = numB;
+    this.numC = numC;
+    this.numD = numD;
+    this.numE = numE;
+    this.numF = numF;
+    this.lColor = lColor;
+    this.tX2 = tX2;
+    this.tY2 = tY2;
+    this.lAngle = lAngle
+  }
+  display(){
+    for (let i = 0; i < 7; i++) {
+      push()
+      translate(this.tX2, this.tY2)
+      fill(0);
+      stroke(this.lColor);
+      strokeWeight(5)
+      beginShape();
+      curveVertex(this.LX1 + i * this.numA, this.LY1 + i * this.numD);
+      curveVertex(this.LX1 + i * this.numA, this.LY1 + i * this.numD);
+      curveVertex(this.LX2 + i * this.numB,this.LY2 + i * this.numE);
+      curveVertex(this.LX3 + i * this.numC,this.LY3 + i * this.numF);
+      curveVertex(this.LX3 + i * this.numC,this.LY3 + i * this.numF);
+      endShape();
+      pop()
     }
-    noStroke();
-    ellipse(x, y, size);
-  }
-
-  drawLeaveCurve()
-  drawgrass();
-  drawgrass1();
-  drawFlippedGrass();
-  drawFlippedGrass1();
-  drawgrass2();
-
-  stroke(79, 21, 27);
-  line(190, 80, 220, 220);
-
-  // draw the first roots of the huge grass
-  noStroke();
-  fill(183, 90, 125);  
-  ellipse(190, 90, 40, 30);  
-
-  //draw the second roots of the huge grass
-  fill(196, 85, 135);  
-  ellipse(150, 320, 40, 35);
-
-  fill(105, 46, 76);  
-  ellipse(150, 320, 35, 30);
-  
-  fill(252, 105, 155); 
-  ellipse(150, 320, 30, 25);  
-  
-  fill(82, 25, 50); 
-  ellipse(150, 320, 25, 20);
-
-  //draw the third roots of the huge grass
-  fill(229, 82, 139);  
-  ellipse(115, 455, 45, 30);  
-
-  smallerGrass.push(new Small(0, 0, color(0, 0, 0), -1, 12, 3, 80, 5));
-  smallerGrass.push(new Small(0, 180, color(0, 0, 0), -1, 7, 3, 25, 5));
-  smallerGrass.push(new Small(5, 230, color(0, 0, 0), -1, 8, 3, 40, 10));
-  smallerGrass.push(new Small(5, 400, color(0, 0, 0), -1, 8, 3, 40, 10));
-  smallerGrass.push(new Small(10, 400, color(209, 79, 127), -1, 7, 3, 40, 10));
-  smallerGrass.push(new Small(10, 230, color(209, 79, 127), -1, 7, 3, 40, 10));
-  smallerGrass.push(new Small(95, 200, color(0, 0, 0), 2, 8, 3, 25, 5));
-  smallerGrass.push(new Small(90, 205, color(255, 0, 0), 2, 8, 3, 25, 5));
-  smallerGrass.push(new Small(192, 153, color(255, 0, 0)));
-  smallerGrass.push(new Small(205, 150, color(255, 0, 0)));
-  smallerGrass.push(new Small(192, 153, color(255, 0, 0)));
-  smallerGrass.push(new Small(230, 220, color(220, 79, 180), 2, 7));
-  smallerGrass.push(new Small(225, 220, color(0, 0, 0), 2, 7));
-  smallerGrass.push(new Small(270, 180, color(0, 0, 0), 1, 6));
-  //red, pink black progression
-  smallerGrass.push(new Small(290, 240, color(0, 0, 0)));
-  smallerGrass.push(new Small(295, 240, color(209, 79, 127)));
-  smallerGrass.push(new Small(300, 240, color(255, 0, 0)));
-  //red, pink, black progression
-  smallerGrass.push(new Small(290, 290, color(0, 0, 0)));
-  smallerGrass.push(new Small(295, 290, color(209, 79, 127)));
-  smallerGrass.push(new Small(300, 290, color(255, 0, 0)));
-   //red, pink progression
-  smallerGrass.push(new Small(295, 340, color(209, 79, 127)));
-  smallerGrass.push(new Small(300, 340, color(255, 0, 0)));
-  smallerGrass.push(new Small(300, 440, color(0, 0, 0), 1, 6));
-  smallerGrass.push(new Small(290, 440, color(0, 0, 0), 1, 6));
-  smallerGrass.push(new Small(300, 500, color(0, 0, 0), 1, 5));
-  smallerGrass.push(new Small(300, 540, color(0, 0, 0), 1, 5));
-  smallerGrass.push(new Small(270, 580, color(0, 0, 0), 1, 5));
-  smallerGrass.push(new Small(205, 600, color(255, 0, 0), 2, 14, 3, 25, 5));
-  smallerGrass.push(new Small(80, 350, color(255, 0, 0), -1.5, 10, 3, 20, 10));
-  smallerGrass.push(new Small(120, 400, color(220, 79, 180), 2, 16, 3, 30, 20));
-  smallerGrass.push(new Small(260, 430, color(107, 33, 33), 1, 8))
-  smallerGrass.push(new Small(220, 490, color(0, 0, 0), -1, 6));
-
-  for (let grass of smallerGrass) {
-    grass.display();
   }
 }
 
-function drawLeaveCurve(){
-  noFill();
-  stroke(0);
-  strokeWeight(5)
-  beginShape();
-  curveVertex(0,140);
-  curveVertex(0,140);
-  curveVertex(80,140);
-  curveVertex(150,155);
-  curveVertex(150,155);
-  endShape();
-  
-  for (let i = 0; i < 7; i++) {
-    noFill();
-    stroke(0);
-    beginShape();
-    curveVertex(30 + i * 19, 150 + i);
-    curveVertex(30 + i * 19, 150 + i * 2);
-    curveVertex(45 + i * 18, 120 + i * 4);
-    curveVertex(75 + i * 19, 100 + i * 6);
-    curveVertex(75 + i * 19, 100 + i * 7);
-    endShape();
+class Smallerleave{
+  constructor(sX1, sY1, sX2, sY2, sX3, sY3, num1, num2, num3, num4, num5, num6, ColorS, tX3, tY3, AngleS){
+    this.sX1 = sX1;
+    this.sY1 = sY1;
+    this.sX2 = sX2;
+    this.sY2 = sY2;
+    this.sX3 = sX3;
+    this.sY3 = sY3;
+    this.num1 = num1;
+    this.num2 = num2;
+    this.num3 = num3;
+    this.num4 = num4;
+    this.num5 = num5;
+    this.num6 = num6;
+    this.ColorS = ColorS;
+    this.tX3 = tX3;
+    this.tY3 = tY3;
+    this.AngleS = AngleS
   }
-
-  for (let i = 0; i < 7; i++) {
-    noFill();
-    stroke(0);
-    beginShape();
-    curveVertex(20 + i * 19, 138 + i);
-    curveVertex(20 + i * 19, 138 + i * 2);
-    curveVertex(35 + i * 18, 145 + i * 5);
-    curveVertex(50 + i * 19, 155 + i * 6);
-    curveVertex(60 + i * 19, 160 + i * 7);
-    endShape();
-  }
-  for (let i = 0; i < 5; i++) {
-    noFill()
-    stroke(209, 79, 127);
-    beginShape();
-    curveVertex(35 + i * 27, 140 + i);
-    curveVertex(35 + i * 27, 140 + i * 2);
-    curveVertex(65 + i * 20, 120 + i * 5);
-    curveVertex(80+ i * 19, 110 + i * 6);
-    curveVertex(80 + i * 19, 110 + i * 6);
-    endShape();
-  }
-  for (let i = 0; i < 5; i++) {
-    noFill()
-    stroke(209, 79, 127);
-    beginShape();
-    curveVertex(25 + i * 28, 140 + i);
-    curveVertex(25 + i * 28, 140 + i * 2);
-    curveVertex(35 + i * 28, 150 + i * 5);
-    curveVertex(80+ i * 19, 165 + i * 4);
-    curveVertex(80 + i * 19, 165 + i * 5);
-    endShape();
+  display(){
+    for (let i = 0; i < 5; i++) {
+      push()
+      translate(this.tX3, this.tY3)
+      noFill();
+      stroke(this.ColorS);
+      strokeWeight(4)
+      beginShape();
+      curveVertex(this.sX1 + i * this.num1, this.sY1 + i * this.num4);
+      curveVertex(this.sX1 + i * this.num1, this.sY1 + i * this.num4);
+      curveVertex(this.sX2 + i * this.num2, this.sY2 + i * this.num5);
+      curveVertex(this.sX3 + i * this.num3, this.sY3 + i * this.num6);
+      curveVertex(this.sX3 + i * this.num3, this.sY3 + i * this.num6);
+      endShape();
+      pop()
+    }
   }
 }
+
