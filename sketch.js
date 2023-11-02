@@ -3,12 +3,12 @@ let smallerGrass = [];
 let stems = [];
 let leave = []
 let smallerleave = [];
-let frameCounter = 0;
 
 function setup() {
   createCanvas(300, 600);
   background(242,169,4);
-   
+
+  // draw pink and black dots
   for (let i = 0; i < numDots; i++) {
     let x = random(width);
     let y = random(height);
@@ -84,13 +84,14 @@ function setup() {
 }
 
 function draw() {
-  frameRate(1)
-
+  frameRate(1);
   drawgrass();
   drawgrass1();
   drawFlippedGrass();
   drawFlippedGrass1();
   drawgrass2();
+  drawStraightWeeds();
+  drawCurvedWeeds();
 
   stroke(79, 21, 27);
   line(190, 80, 220, 220);
@@ -190,7 +191,6 @@ function drawgrass1() {
   let dotSize = 5;
 
   for (let i = 0; i < numCurves; i++) {
-    if (frameCounter % 2000 == 0) { 
       if (random(1) > 0.5) {
         stroke(209, 79, 127);  
       } else {
@@ -229,7 +229,6 @@ function drawgrass1() {
 
       ellipse(px, py, dotSize, dotSize);
     }
-  }
 }
 
 function drawFlippedGrass1() {
@@ -498,6 +497,3 @@ class Smallerleave {
     }
   }
 }
-
-
-
