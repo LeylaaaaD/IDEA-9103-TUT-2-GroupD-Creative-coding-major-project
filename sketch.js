@@ -3,11 +3,26 @@ let smallerGrass = [];
 let stems = [];
 let leave = []
 let smallerleave = [];
+let frameCounter = 0;
 
 function setup() {
   createCanvas(300, 600);
-  background(242,169,4); 
-  
+  background(242,169,4);
+   
+  for (let i = 0; i < numDots; i++) {
+    let x = random(width);
+    let y = random(height);
+    let size = random(5, 8);
+    
+    if (random(1) > 0.5) {
+     fill(214, 139, 168);  
+    } else {
+      fill(0);      
+    }
+    noStroke();
+    ellipse(x, y, size);
+  }
+
   smallerGrass = [
     new Small(0, 0, color(0, 0, 0), -1, 12, 3, 80, 5),
     new Small(0, 180, color(0, 0, 0), -1, 7, 3, 25, 5),
@@ -66,25 +81,11 @@ function setup() {
     new Smallerleave(185, 420, 175, 390, 190, 360, 9, 13, 10, -12, -14, -9, color(209, 79, 127), null, null, null),
     new Smallerleave(180, 430, 210, 420, 250, 385, 9, 7, 4, -12, -15, -15, color(209, 79, 127), null, null, null)
   ];
-
-  noLoop();
 }
 
 function draw() {
-  // draw the pink and black dots
-  for (let i = 0; i < numDots; i++) {
-    let x = random(width);
-    let y = random(height);
-    let size = random(5, 8);
-    
-    if (random(1) > 0.5) {
-     fill(214, 139, 168);  
-    } else {
-      fill(0);      
-    }
-    noStroke();
-    ellipse(x, y, size);
-  }
+  frameRate(1)
+
   drawgrass();
   drawgrass1();
   drawFlippedGrass();
@@ -149,8 +150,9 @@ function drawgrass() {
      } else {
        stroke(179, 70, 105);      
      }
-
-     let angle = map(i, 0, numCurves, 0, -HALF_PI);  
+  
+    for (let i = 0; i < numCurves; i++) {
+      let angle = map(i, 0, numCurves, 0, -HALF_PI);
      
      let x1 = ellipseCenterX;
      let y1 = ellipseCenterY;
@@ -162,6 +164,7 @@ function drawgrass() {
      let y4 = y1 + lineLength * sin(angle);
  
      bezier(x1, y1, x2, y2, x3, y3, x4, y4);
+    }
   }
 }
 
@@ -187,11 +190,13 @@ function drawgrass1() {
   let dotSize = 5;
 
   for (let i = 0; i < numCurves; i++) {
-    if (random(1) > 0.5) {
-      stroke(209, 79, 127);  
-     } else {
-       stroke(0);      
-     }
+    if (frameCounter % 2000 == 0) { 
+      if (random(1) > 0.5) {
+        stroke(209, 79, 127);  
+      } else {
+        stroke(0);      
+      }
+    }
 
     let angle = map(i, 0, numCurves, 0, -HALF_PI);  
      
@@ -252,7 +257,7 @@ function drawgrass2() {
      } else {
        stroke(0);      
      }
-
+  
      let angle = map(i, 2, numCurves, 0, PI);  
      
      let x1 = ellipseCenterX;
