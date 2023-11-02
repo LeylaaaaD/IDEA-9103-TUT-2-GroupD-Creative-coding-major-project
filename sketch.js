@@ -160,79 +160,6 @@ function drawgrass2() {
     }
 }
 
-class stem {
-  constructor(SX1, SY1, SX2, SY2, SX3, SY3, sColor, tX1, tY1, sAngle){
-    this.SX1 = SX1;
-    this.SY1 = SY1;
-    this.SX2 = SX2;
-    this.SY2 = SY2;
-    this.SX3 = SX3;
-    this.SY3 = SY3;
-    this.sColor = sColor;
-    this.tX1 = tX1;
-    this.tY1 = tY1;
-    this.sAngle = sAngle
-  }
-  display(){
-    push()
-    translate(this.tX1, this.tY1)
-    fill(0);
-    stroke(this.sColor);
-    strokeWeight(5)
-    beginShape();
-    curveVertex(this.SX1,this.SY1);
-    curveVertex(this.SX1,this.SY1);
-    curveVertex(this.SX2,this.SY2);
-    curveVertex(this.SX3,this.SY3);
-    curveVertex(this.SX3,this.SY3);
-    endShape();
-    pop()
-  }
-}
-
-class Small {
-  constructor(x, y, color, angleMultiplier = 1, numCurves = 5, strokeW = 3, lineLength = 20, circleSize = 5) {
-    this.x = x;
-    this.y = y;
-    this.color = color;
-    this.circleRadius = circleSize / 2;
-    this.numCurves = numCurves;
-    this.curveWidth = 2.5;
-    this.strokeW = strokeW;
-    this.lineLength = lineLength;
-    this.angleMultiplier = angleMultiplier;
-  }
-
-  display() {
-    fill(this.color);
-    ellipse(this.x, this.y, this.circleRadius * 2);
-
-    stroke(this.color);
-    strokeWeight(this.strokeW);
-    noFill();
-
-    let rotationOffset = PI / 2;
-
-    for (let i = 0; i < this.numCurves; i++) {
-      let startAngle = this.angleMultiplier * PI / this.numCurves * i + rotationOffset; 
-      let endAngle = startAngle + HALF_PI / this.numCurves;
-      let curveRadius = this.circleRadius + this.lineLength; 
-      let startX = this.x + this.circleRadius * cos(startAngle);
-      let startY = this.y + this.circleRadius * sin(startAngle);
-
-      beginShape();
-      vertex(startX, startY);
-      for (let a = startAngle; a < endAngle; a += 0.01) {
-        let x = this.x + curveRadius * cos(a);
-        let y = this.y + curveRadius * sin(a);
-        let offset = map(sin(a * 4), -1, 1, -this.curveWidth, this.curveWidth);
-        vertex(x + offset, y);
-      }
-      endShape();
-    }
-  }
-}
-
 function drawStraightWeeds() {
   let numWeeds = 30;
   let weedSpacing = width / numWeeds;
@@ -305,6 +232,79 @@ function drawCurvedWeeds() {
     let ctrlPtY3 = constrain(y2 + random(-controlOffset, controlOffset), 0, height);
     let ctrlPtY4 = constrain(y2 + random(-controlOffset, controlOffset), 0, height);
     bezier(width, y2, width - weedHeight / 3, ctrlPtY3, width - 2 * weedHeight / 3, ctrlPtY4, width - weedHeight, y2);
+  }
+}
+
+class stem {
+  constructor(SX1, SY1, SX2, SY2, SX3, SY3, sColor, tX1, tY1, sAngle){
+    this.SX1 = SX1;
+    this.SY1 = SY1;
+    this.SX2 = SX2;
+    this.SY2 = SY2;
+    this.SX3 = SX3;
+    this.SY3 = SY3;
+    this.sColor = sColor;
+    this.tX1 = tX1;
+    this.tY1 = tY1;
+    this.sAngle = sAngle
+  }
+  display(){
+    push()
+    translate(this.tX1, this.tY1)
+    fill(0);
+    stroke(this.sColor);
+    strokeWeight(5)
+    beginShape();
+    curveVertex(this.SX1,this.SY1);
+    curveVertex(this.SX1,this.SY1);
+    curveVertex(this.SX2,this.SY2);
+    curveVertex(this.SX3,this.SY3);
+    curveVertex(this.SX3,this.SY3);
+    endShape();
+    pop()
+  }
+}
+
+class Small {
+  constructor(x, y, color, angleMultiplier = 1, numCurves = 5, strokeW = 3, lineLength = 20, circleSize = 5) {
+    this.x = x;
+    this.y = y;
+    this.color = color;
+    this.circleRadius = circleSize / 2;
+    this.numCurves = numCurves;
+    this.curveWidth = 2.5;
+    this.strokeW = strokeW;
+    this.lineLength = lineLength;
+    this.angleMultiplier = angleMultiplier;
+  }
+
+  display() {
+    fill(this.color);
+    ellipse(this.x, this.y, this.circleRadius * 2);
+
+    stroke(this.color);
+    strokeWeight(this.strokeW);
+    noFill();
+
+    let rotationOffset = PI / 2;
+
+    for (let i = 0; i < this.numCurves; i++) {
+      let startAngle = this.angleMultiplier * PI / this.numCurves * i + rotationOffset; 
+      let endAngle = startAngle + HALF_PI / this.numCurves;
+      let curveRadius = this.circleRadius + this.lineLength; 
+      let startX = this.x + this.circleRadius * cos(startAngle);
+      let startY = this.y + this.circleRadius * sin(startAngle);
+
+      beginShape();
+      vertex(startX, startY);
+      for (let a = startAngle; a < endAngle; a += 0.01) {
+        let x = this.x + curveRadius * cos(a);
+        let y = this.y + curveRadius * sin(a);
+        let offset = map(sin(a * 4), -1, 1, -this.curveWidth, this.curveWidth);
+        vertex(x + offset, y);
+      }
+      endShape();
+    }
   }
 }
 
