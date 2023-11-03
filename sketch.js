@@ -8,18 +8,20 @@ function setup() {
   createCanvas(300, 600);
   background(242,169,4); 
 
-
+  //Setting attributes for the stem objects that represent huge leaves' stems
   stems = [
     new stem(0, 140, 80, 140, 150, 150, 0, 0, 0),
     new stem(0, 300, 25, 310, 50, 335, 0, 0, 0),
     new stem(160, 450, 220, 380, 240, 340, 0, 0, 0)
   ];
 
+  //Setting attributes for the Leave objects that represent huge leaves' blade 
   leave = [
     new Leave(30, 140, 45, 120, 75, 105, 19, 18, 19, 1, 4, 6, 0, 0, 0),
     new Leave(20, 138, 35, 145, 50, 155, 19, 18, 19, 1, 4, 6, 0, 0, 0)
   ];
-  
+
+  //Setting attributes for the Smallerleave objects that represent huge leaves' blade
   smallerLeave = [
     new Smallerleave(35, 140, 65, 120, 80, 110, 27, 20, 19, 2, 5, 6, color(209, 79, 127)),
     new Smallerleave(25, 140, 45, 140, 80, 160, 27, 21, 19, 2, 5, 6, color(209, 79, 127)),
@@ -33,6 +35,7 @@ function setup() {
     new Smallerleave(185, 420, 220, 410, 250, 385, 10, 7, 4, -14, -14, -13, 0, 0, 0),
   ];
 
+  //Setting attributes for the Small objects that represent small flower looked grass
   smallerGrass = [
     new Small(0, 0, color(0, 0, 0), -1, 12, 3, 80, 5),
     new Small(0, 180, color(0, 0, 0), -1, 7, 3, 25, 5),
@@ -74,7 +77,7 @@ function draw() {
   background(242,169,4); 
   frameRate(1);
 
-  // draw the pink and black dots
+  //Draw the pink and black dots
   for (let i = 0; i < numDots; i++) {
     let x = random(width);
     let y = random(height);
@@ -89,24 +92,26 @@ function draw() {
     ellipse(x, y, size);
   }
 
+  //Calling functions to draw three huge grass 
   grass();
   grass1();
   grass2();
   FlippedGrass();
   FlippedGrass1();
+  //Calling functions to draw the weeds at the botton left corner and top right edge
   StraightWeeds();
   CurvedWeeds();
 
-  // draw the branch of the first huge grass
+  //Draw the branch of the first huge grass
   stroke(79, 21, 27);
   line(190, 80, 220, 220);
 
-  // draw the first roots of the huge grass
+  //Draw the first roots of the huge grass
   noStroke();
   fill(183, 90, 125);  
   ellipse(190, 90, 40, 30);  
 
-  //draw the second roots of the huge grass
+  //Draw the second roots of the huge grass
   fill(196, 85, 135);  
   ellipse(150, 320, 40, 35);
 
@@ -119,10 +124,11 @@ function draw() {
   fill(82, 25, 50); 
   ellipse(150, 320, 25, 20);
 
-  //draw the third roots of the huge grass
+  //Draw the third roots of the huge grass
   fill(229, 82, 139);  
   ellipse(115, 455, 45, 30);  
   
+  //Display all the class object that were setup in setup function
   for (let grass of smallerGrass) {
     grass.display();
   }
@@ -149,7 +155,8 @@ function grass() {
   let numCurves = 8; 
   let lineLength = 120; 
   let curveAmount = 40; 
- 
+  
+  //Use a for loop to give some randomness to color setting of the curves
   for (let i = 0; i < numCurves; i++) {
     if (random(1) > 0.2) {
       stroke(209, 79, 127);  
@@ -158,7 +165,6 @@ function grass() {
      }
 
      let angle = map(i, 0, numCurves, 0, -HALF_PI);  
-     
      let x1 = ellipseCenterX;
      let y1 = ellipseCenterY;
      let x2 = x1 + curveAmount * sin(angle);
@@ -172,16 +178,16 @@ function grass() {
   }
 }
 
+//Flip the first half of the huge grass to form the other half
 function FlippedGrass() {
   push();  
- 
   translate(375, 10);
   scale(-1, 1);
   grass(); 
   pop();  
 }
 
-// Draw the second huge grass
+//Similarlly to he first huge grass, draw the second huge grass
 function grass1() {
   noFill();
   strokeWeight(4);
@@ -193,6 +199,7 @@ function grass1() {
   let steps = 8;
   let dotSize = 5;
 
+  //Use a for loop to give some randomness to color setting of the curves
   for (let i = 0; i < numCurves; i++) {
     if (random(1) > 0.5) {
       stroke(209, 79, 127);  
@@ -213,7 +220,7 @@ function grass1() {
  
     bezier(x1, y1, x2, y2, x3, y3, x4, y4);  
 
-  // add the red dots align the grass line
+  // Add the red dots align the grass line
     fill(255, 0, 0);  
     noStroke();  
     for (let j = 0; j <= steps; j++) {
@@ -233,7 +240,7 @@ function grass1() {
     }
   }
 }
-
+// Flip the secound huge grass as well
 function FlippedGrass1() {
   push();  
  
@@ -253,6 +260,7 @@ function grass2() {
     let lineLength = 100; 
     let curveAmount = 40; 
  
+   //Use a for loop to give some randomness to color setting of the curves
    for (let i = 0; i < numCurves; i++) {
     if (random(1) > 0.3) {
       stroke(209, 79, 127);  
@@ -275,6 +283,7 @@ function grass2() {
     }
 }
 
+// Function of the straight weeds
 function StraightWeeds() {
   let numWeeds = 20;
   let weedSpacing = 9;
@@ -282,7 +291,7 @@ function StraightWeeds() {
   let minWeedHeight = 20;
   let maxWeedHeight = 50;
 
-  // Drawing straight weeds on the bottom and right
+  // Use a for loop to give some randomness to color setting of the weeds
   for (let i = 0; i <= numWeeds; i++) {
     weedWidth = random(2,4);
     if (random(1) > 0.4) {
@@ -290,8 +299,9 @@ function StraightWeeds() {
     } else {
       stroke(0);
     }
-    strokeWeight(weedWidth);
 
+    //Setting the stroke attribute using the pre-set values and locate the weeds
+    strokeWeight(weedWidth);
     let x = i * weedSpacing;
     x = constrain(x, 0, 180);
     let weedHeight = random(minWeedHeight, maxWeedHeight);
@@ -325,6 +335,7 @@ function CurvedWeeds() {
   let maxWeedHeight = 60;
   let controlOffset = 20;
 
+  //Use a for loop to give some randomness to color setting of the curves
   for (let i = 0; i <= numWeeds; i++) {
     if (random(1) > 0.2) {
       stroke(179, 70, 105);
@@ -360,6 +371,10 @@ function CurvedWeeds() {
 }
 
 class stem {
+  //Using constructor to set the parameters.
+  //(SX1, SY1), (SX2, SY2) and (SX3, SY3) represents the coordinates that will be used in curveVertex() method
+  //sColor stands for stem color which will be passed to stroke color
+  //tX1, tY1 and sAngle are planed for translate coordinates and rotation angle
   constructor(SX1, SY1, SX2, SY2, SX3, SY3, sColor, tX1, tY1, sAngle){
     this.SX1 = SX1;
     this.SY1 = SY1;
@@ -373,6 +388,7 @@ class stem {
     this.sAngle = sAngle
   }
   display(){
+    //Using curveVertex() method for the leave blade
     push()
     translate(this.tX1, this.tY1)
     fill(0);
@@ -433,6 +449,12 @@ class Small {
 }
 
 class Leave {
+  //Using constructor to set the parameters.
+  //(LX1, LY1), (LX2, LY2) and (LX3, LY3) represents the coordinates that will be used in curveVertex() method
+  //numA, numB and numC are used to vary the x coordinates for the three main points
+  //numD, numE and numF are used to vary the y coordinates for the three main points
+  //lColor stands for leave color which will be passed to stroke color
+  //tX2, tY2 and lAngle are planed for translate coordinates and rotation angle
   constructor(LX1, LY1, LX2, LY2, LX3, LY3, numA, numB, numC, numD, numE, numF, lColor, tX2, tY2, lAngle){
     this.LX1 = LX1;
     this.LY1 = LY1;
@@ -472,6 +494,7 @@ class Leave {
 }
 
 class Smallerleave {
+  //Similar parameters like leave object except less curve will be made
   constructor(sX1, sY1, sX2, sY2, sX3, sY3, num1, num2, num3, num4, num5, num6, ColorS, tX3, tY3, AngleS){
     this.sX1 = sX1;
     this.sY1 = sY1;
